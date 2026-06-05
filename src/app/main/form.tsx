@@ -67,6 +67,9 @@ export default function AddHewanScreen() {
       <SafeAreaView style={styles.safeArea}>
 
         <ThemedView style={styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+            <ThemedText style={styles.backButtonText}>← Kembali</ThemedText>
+          </TouchableOpacity>
           <ThemedText type="title">Tambah Ternak Baru</ThemedText>
         </ThemedView>
 
