@@ -31,6 +31,22 @@ export default function AddHewanScreen() {
     }
   };
 
+  const handleBack = () => {
+    const hasData = nama.trim() || jenis.trim() || harga.trim();
+    if (hasData) {
+      Alert.alert(
+        'Batalkan Pengisian?',
+        'Data yang sudah diisi akan hilang. Yakin ingin kembali?',
+        [
+          { text: 'Tetap di Sini', style: 'cancel' },
+          { text: 'Ya, Kembali', style: 'destructive', onPress: () => router.back() },
+        ]
+      );
+    } else {
+      router.back();
+    }
+  };
+
   const onSubmit = () => {
     const cleanNama = nama.trim();
     const cleanJenis = jenis.trim();
@@ -67,7 +83,7 @@ export default function AddHewanScreen() {
       <SafeAreaView style={styles.safeArea}>
 
         <ThemedView style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+          <TouchableOpacity style={styles.backButton} onPress={handleBack}>
             <ThemedText style={styles.backButtonText}>← Kembali</ThemedText>
           </TouchableOpacity>
           <ThemedText type="title">Tambah Ternak Baru</ThemedText>
