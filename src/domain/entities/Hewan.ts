@@ -8,3 +8,9 @@ export interface Hewan {
     created_at?: string;
     updated_at?: string;
 }
+
+export interface APIResponse<T> {
+    success: boolean;
+    message: string;
+    data: T;
+}
