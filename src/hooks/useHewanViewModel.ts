@@ -53,6 +53,23 @@ export const useHewanViewModel = () => {
         }
     };
 
+    const fetchHewanById = async (id: number): Promise<Hewan | null> => {
+        setLoading(true);
+        setError(null);
+        try {
+            const res = await hewanRepo.getById(id);
+            if (res.success) {
+                return res.data;
+            }
+            return null;
+        } catch (err: any) {
+            setError(err.response?.data?.message || 'Gagal mengambil detail hewan');
+            return null;
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const deleteHewan = async (id: number) => {
         try {
             const res = await hewanRepo.delete(id);
@@ -69,6 +86,7 @@ export const useHewanViewModel = () => {
         loading,
         error,
         fetchHewan,
+        fetchHewanById,
         addHewan,
         updateHewan,
         deleteHewan,
