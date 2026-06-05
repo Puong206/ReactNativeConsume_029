@@ -140,7 +140,7 @@ export default function AddHewanScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   safeArea: { flex: 1, paddingHorizontal: 24 },
-  header: { marginVertical: 24 },
+  header: { marginVertical: 24, gap: 12 },
   form: { gap: 16 },
   input: {
     backgroundColor: '#f8fafc',
@@ -174,4 +174,16 @@ const styles = StyleSheet.create({
   },
   submitButtonText: { color: '#ffffff', fontSize: 16, fontWeight: 'bold' },
   errorText: { color: '#ef4444', textAlign: 'center', fontWeight: '600' },
+  backButton: {
+    backgroundColor: '#f1f5f9',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 8,
+    alignSelf: 'flex-start',
+  },
+  backButtonText: {
+    color: '#0284c7',
+    fontSize: 14,
+    fontWeight: '600',
+  },
 });
