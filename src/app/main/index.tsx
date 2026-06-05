@@ -2,8 +2,8 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useAuthViewModel } from '@/hooks/useAuthViewModel';
 import { useHewanViewModel } from '@/hooks/useHewanViewModel';
-import { useRouter } from 'expo-router';
-import { useEffect } from 'react';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useEffect } from 'react';
 import { Alert, FlatList, RefreshControl, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -12,9 +12,11 @@ export default function DashboardScreen() {
   const { handleLogout } = useAuthViewModel();
   const router = useRouter();
 
-  useEffect(() => {
-    fetchHewan();
-  }, [fetchHewan]);
+  useFocusEffect(
+    useCallback(() => {
+      fetchHewan();
+    }, [fetchHewan])
+  );
 
   const confirmDelete = (id: number, namaHewan: string) => {
     Alert.alert(
@@ -68,7 +70,9 @@ export default function DashboardScreen() {
                   {item.nama}
                 </ThemedText>
                 <ThemedText style={styles.animalMeta}>
-                  {item.jenis} • <ThemedText style={item.status === 'tersedia' ? styles.statusActive : styles.statusSold}>{item.status}</ThemedText>
+                  {item.jenis} • <ThemedText style={item.status === 'tersedia' ? styles.statusActive : styles.statusSold}>
+                    {item.status ? (item.status.charAt(0).toUpperCase() + item.status.slice(1)) : 'Tersedia'}
+                  </ThemedText>
                 </ThemedText>
                 <ThemedText style={styles.animalPrice}>
                   Rp {item.harga.toLocaleString('id-ID')}
