@@ -74,12 +74,20 @@ export default function DashboardScreen() {
                   Rp {item.harga.toLocaleString('id-ID')}
                 </ThemedText>
               </ThemedView>
-              <TouchableOpacity
-                style={styles.deleteButton}
-                onPress={() => confirmDelete(item.id!, item.nama)}
-              >
-                <ThemedText style={styles.deleteButtonText}>Hapus</ThemedText>
-              </TouchableOpacity>
+              <ThemedView style={styles.actionButtons}>
+                <TouchableOpacity
+                  style={styles.editButton}
+                  onPress={() => router.push({ pathname: '/main/form', params: { id: item.id } })}
+                >
+                  <ThemedText style={styles.editButtonText}>Edit</ThemedText>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() => confirmDelete(item.id!, item.nama)}
+                >
+                  <ThemedText style={styles.deleteButtonText}>Hapus</ThemedText>
+                </TouchableOpacity>
+              </ThemedView>
             </ThemedView>
           )}
         />
