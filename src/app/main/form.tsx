@@ -16,6 +16,7 @@ export default function AddHewanScreen() {
   const [harga, setHarga] = useState('');
   const [tanggalLahir, setTanggalLahir] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [status, setStatus] = useState<'tersedia' | 'terjual'>('tersedia');
 
   const { addHewan, updateHewan, fetchHewanById, loading, error } = useHewanViewModel();
   const router = useRouter();
@@ -30,6 +31,9 @@ export default function AddHewanScreen() {
           setHarga(String(data.harga));
           if (data.tanggal_lahir) {
             setTanggalLahir(new Date(data.tanggal_lahir));
+          }
+          if (data.status) {
+            setStatus(data.status);
           }
         }
       };
