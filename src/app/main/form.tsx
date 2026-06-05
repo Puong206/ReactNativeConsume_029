@@ -265,4 +265,53 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
+  dropdownButton: {
+    backgroundColor: '#f8fafc',
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  dropdownButtonText: {
+    fontSize: 16,
+    color: '#0f172a',
+  },
+  dropdownArrow: {
+    fontSize: 12,
+    color: '#64748b',
+  },
+  dropdownMenu: {
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    borderRadius: 12,
+    marginTop: -8,
+    overflow: 'hidden',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  dropdownItem: {
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f1f5f9',
+  },
+  dropdownItemActive: {
+    backgroundColor: '#f0f9ff',
+  },
+  dropdownItemText: {
+    fontSize: 16,
+    color: '#334155',
+  },
+  dropdownItemTextActive: {
+    color: '#0284c7',
+    fontWeight: '600',
+  },
 });
