@@ -3,3 +3,8 @@ export interface Auth {
     email: string;
     password: string;
 }
+
+export interface RegisterResponse {
+    message: string;
+    data: User;
+}
