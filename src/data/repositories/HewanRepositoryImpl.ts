@@ -1,3 +1,4 @@
+import { APIResponse } from "@/domain/entities/Hewan";
 import apiClient from "../api/apiClient";
 
 export class HewanRepositoryImpl implements IHewanRepository {
