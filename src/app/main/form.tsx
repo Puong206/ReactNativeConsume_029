@@ -17,6 +17,7 @@ export default function AddHewanScreen() {
   const [tanggalLahir, setTanggalLahir] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [status, setStatus] = useState<'tersedia' | 'terjual'>('tersedia');
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const { addHewan, updateHewan, fetchHewanById, loading, error } = useHewanViewModel();
   const router = useRouter();
@@ -161,6 +162,44 @@ export default function AddHewanScreen() {
               onChange={onChangeDate}
               maximumDate={new Date()}
             />
+          )}
+
+          <TouchableOpacity
+            style={styles.dropdownButton}
+            onPress={() => setShowDropdown(!showDropdown)}
+            activeOpacity={0.7}
+          >
+            <ThemedText style={styles.dropdownButtonText}>
+              Status: {status === 'tersedia' ? 'Tersedia' : 'Terjual'}
+            </ThemedText>
+            <ThemedText style={styles.dropdownArrow}>{showDropdown ? '▲' : '▼'}</ThemedText>
+          </TouchableOpacity>
+
+          {showDropdown && (
+            <ThemedView style={styles.dropdownMenu}>
+              <TouchableOpacity
+                style={[styles.dropdownItem, status === 'tersedia' && styles.dropdownItemActive]}
+                onPress={() => {
+                  setStatus('tersedia');
+                  setShowDropdown(false);
+                }}
+              >
+                <ThemedText style={[styles.dropdownItemText, status === 'tersedia' && styles.dropdownItemTextActive]}>
+                  Tersedia (Ready)
+                </ThemedText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.dropdownItem, status === 'terjual' && styles.dropdownItemActive]}
+                onPress={() => {
+                  setStatus('terjual');
+                  setShowDropdown(false);
+                }}
+              >
+                <ThemedText style={[styles.dropdownItemText, status === 'terjual' && styles.dropdownItemTextActive]}>
+                  Terjual (Sold)
+                </ThemedText>
+              </TouchableOpacity>
+            </ThemedView>
           )}
 
           <TouchableOpacity style={styles.submitButton} onPress={onSubmit} disabled={loading}>
