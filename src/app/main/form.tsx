@@ -19,6 +19,8 @@ export default function AddHewanScreen() {
   const [status, setStatus] = useState<'tersedia' | 'terjual'>('tersedia');
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const [initialData, setInitialData] = useState<{ nama: string; jenis: string; harga: string; tanggalLahir: string; status: 'tersedia' | 'terjual' } | null>(null);
+
   const { addHewan, updateHewan, fetchHewanById, loading, error } = useHewanViewModel();
   const router = useRouter();
 
@@ -36,6 +38,13 @@ export default function AddHewanScreen() {
           if (data.status) {
             setStatus(data.status);
           }
+          setInitialData({
+            nama: data.nama,
+            jenis: data.jenis,
+            harga: String(data.harga),
+            tanggalLahir: data.tanggal_lahir || formatDateString(new Date()),
+            status: data.status || 'tersedia',
+          });
         }
       };
       loadHewan();
@@ -57,11 +66,24 @@ export default function AddHewanScreen() {
   };
 
   const handleBack = () => {
-    const hasData = nama.trim() || jenis.trim() || harga.trim();
-    if (hasData) {
+    let hasChanges = false;
+    if (isEditMode && initialData) {
+      hasChanges =
+        nama !== initialData.nama ||
+        jenis !== initialData.jenis ||
+        harga !== initialData.harga ||
+        formatDateString(tanggalLahir) !== initialData.tanggalLahir ||
+        status !== initialData.status;
+    } else {
+      hasChanges = !!(nama.trim() || jenis.trim() || harga.trim());
+    }
+
+    if (hasChanges) {
       Alert.alert(
-        'Batalkan Pengisian?',
-        'Data yang sudah diisi akan hilang. Yakin ingin kembali?',
+        isEditMode ? 'Batalkan Perubahan?' : 'Batalkan Pengisian?',
+        isEditMode
+          ? 'Perubahan yang belum disimpan akan hilang. Yakin ingin kembali?'
+          : 'Data yang sudah diisi akan hilang. Yakin ingin kembali?',
         [
           { text: 'Tetap di Sini', style: 'cancel' },
           { text: 'Ya, Kembali', style: 'destructive', onPress: () => router.back() },
