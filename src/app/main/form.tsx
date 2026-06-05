@@ -141,7 +141,7 @@ export default function AddHewanScreen() {
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
             <ThemedText style={styles.backButtonText}>← Kembali</ThemedText>
           </TouchableOpacity>
-          <ThemedText type="title">Tambah Ternak Baru</ThemedText>
+          <ThemedText type="title">{isEditMode ? 'Edit Data Ternak' : 'Tambah Ternak Baru'}</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.form}>
@@ -236,7 +236,7 @@ export default function AddHewanScreen() {
             {loading ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <ThemedText style={styles.submitButtonText}>Simpan ke Database</ThemedText>
+              <ThemedText style={styles.submitButtonText}>{isEditMode ? 'Simpan Perubahan' : 'Simpan ke Database'}</ThemedText>
             )}
           </TouchableOpacity>
         </ThemedView>
