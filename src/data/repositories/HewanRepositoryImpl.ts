@@ -16,5 +16,8 @@ export class HewanRepositoryImpl implements IHewanRepository {
         return response.data;
     }
 
-    
+    async update(id: number, hewan: Omit<HewanRepositoryImpl, 'id'>): Promise<APIResponse<Hewan>> {
+        const response = await apiClient.put<APIResponse<Hewan>>('/hewan/${id}', hewan);
+        return response.data;
+    }
 }
