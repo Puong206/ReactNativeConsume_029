@@ -2,19 +2,22 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { useHewanViewModel } from '@/hooks/useHewanViewModel';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { ActivityIndicator, Alert, Platform, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function AddHewanScreen() {
+  const { id } = useLocalSearchParams<{ id?: string }>();
+  const isEditMode = !!id;
+
   const [nama, setNama] = useState('');
   const [jenis, setJenis] = useState('');
   const [harga, setHarga] = useState('');
   const [tanggalLahir, setTanggalLahir] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const { addHewan, loading, error } = useHewanViewModel();
+  const { addHewan, updateHewan, fetchHewanById, loading, error } = useHewanViewModel();
   const router = useRouter();
 
   const formatDateString = (date: Date) => {
