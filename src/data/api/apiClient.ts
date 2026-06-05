@@ -12,6 +12,10 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
     async (config) => {
         const token = await SecureStore.getItemAsync('user_token');
-
-    }
-)
+        if (token && config.headers) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
