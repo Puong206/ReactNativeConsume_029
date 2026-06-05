@@ -97,7 +97,7 @@ export default function AddHewanScreen() {
       jenis: cleanJenis,
       harga: numericHarga,
       tanggal_lahir: formatDateString(tanggalLahir),
-      status: 'tersedia'
+      status: status
     }, () => {
       router.back();
     });
