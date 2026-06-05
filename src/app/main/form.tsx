@@ -92,15 +92,23 @@ export default function AddHewanScreen() {
       return;
     }
 
-    addHewan({
+    const payload = {
       nama: cleanNama,
       jenis: cleanJenis,
       harga: numericHarga,
       tanggal_lahir: formatDateString(tanggalLahir),
       status: status
-    }, () => {
-      router.back();
-    });
+    };
+
+    if (isEditMode && id) {
+      updateHewan(Number(id), payload, () => {
+        router.back();
+      });
+    } else {
+      addHewan(payload, () => {
+        router.back();
+      });
+    }
   };
 
   return (
