@@ -5,4 +5,9 @@ export class AuthRepositoryImpl implements IAuthRepository {
         const response = await apiClient.post<LoginResponse>('/auth/login', { email, password });
         return response.data;
     }
+
+    async register(username: string, email: string, password: string): Promise<RegisterResponse> {
+        const response = await apiClient.post<RegisterResponse>('/auth/register', { username, email, password });
+        return response.data;
+    }
 }
