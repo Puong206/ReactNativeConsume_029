@@ -4,6 +4,12 @@ export interface User {
     password: string;
 }
 
+export interface AuthResponse {
+    message: string;
+    token: string;
+    user: User;
+}
+
 export interface RegisterResponse {
     message: string;
     data: User;
