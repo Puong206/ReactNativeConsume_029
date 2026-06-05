@@ -187,6 +187,25 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 13,
   },
+  actionButtons: {
+    flexDirection: 'row',
+    gap: 8,
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  editButton: {
+    backgroundColor: '#f0f9ff',
+    borderWidth: 1,
+    borderColor: '#e0f2fe',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 10,
+  },
+  editButtonText: {
+    color: '#0284c7',
+    fontWeight: '600',
+    fontSize: 13,
+  },
   emptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
