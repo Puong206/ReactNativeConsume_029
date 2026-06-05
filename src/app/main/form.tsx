@@ -3,7 +3,7 @@ import { ThemedView } from '@/components/themed-view';
 import { useHewanViewModel } from '@/hooks/useHewanViewModel';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Platform, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -19,6 +19,23 @@ export default function AddHewanScreen() {
 
   const { addHewan, updateHewan, fetchHewanById, loading, error } = useHewanViewModel();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isEditMode && id) {
+      const loadHewan = async () => {
+        const data = await fetchHewanById(Number(id));
+        if (data) {
+          setNama(data.nama);
+          setJenis(data.jenis);
+          setHarga(String(data.harga));
+          if (data.tanggal_lahir) {
+            setTanggalLahir(new Date(data.tanggal_lahir));
+          }
+        }
+      };
+      loadHewan();
+    }
+  }, [id, isEditMode]);
 
   const formatDateString = (date: Date) => {
     const year = date.getFullYear();
