@@ -4,7 +4,7 @@ export interface User {
     password: string;
 }
 
-export interface AuthResponse {
+export interface LoginResponse {
     message: string;
     token: string;
     user: User;
