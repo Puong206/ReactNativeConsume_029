@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
   },
   animalName: {
     fontSize: 18,
+    fontWeight: '600',
   },
   animalMeta: {
     fontSize: 14,
