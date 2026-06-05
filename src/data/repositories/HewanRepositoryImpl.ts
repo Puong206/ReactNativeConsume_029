@@ -5,4 +5,9 @@ export class HewanRepositoryImpl implements IHewanRepository {
         const response = await apiClient.get<APIResponse<Hewan[]>>('/hewan');
         return response.data;
     }
+
+    async getById(id: number): Promise<APIResponse<Hewan>> {
+        const response = await apiClient.get<APIResponse<Hewan>>('/hewan/${id}');
+        return response.data;
+    }
 }
