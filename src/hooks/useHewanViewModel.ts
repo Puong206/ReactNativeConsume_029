@@ -37,6 +37,22 @@ export const useHewanViewModel = () => {
         }
     };
 
+    const updateHewan = async (id: number, payload: Partial<Hewan>, onSuccess: () => void) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const res = await hewanRepo.update(id, payload);
+            if (res.success) {
+                await fetchHewan();
+                onSuccess();
+            }
+        } catch (err: any) {
+            setError(err.response?.data?.message || 'Gagal mengubah data hewan');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const deleteHewan = async (id: number) => {
         try {
             const res = await hewanRepo.delete(id);
@@ -54,6 +70,7 @@ export const useHewanViewModel = () => {
         error,
         fetchHewan,
         addHewan,
+        updateHewan,
         deleteHewan,
     };
 }
